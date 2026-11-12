@@ -58,4 +58,5 @@ export function rebuild(ops,live,liveHeight){
  }
  return {mode,points:pts};
 }
-export const point=(op,p)=>({height:op.height,id:op.id,method:op.method,p,vol:op.method==='buy'?op.n:op.method==='sell'?op.out+op.tax:0n});
+// `swap` carries what the trader paid/received (FANG and BLOOD base units) for chart markers.
+export const point=(op,p)=>({height:op.height,id:op.id,method:op.method,p,vol:op.method==='buy'?op.n:op.method==='sell'?op.out+op.tax:0n,swap:op.method==='buy'?{buy:true,fang:op.n,blood:op.out}:op.method==='sell'?{buy:false,fang:op.out,blood:op.n}:null});
